@@ -1,0 +1,57 @@
+/* ... existing CSS ... */
+
+/* Timetable Styles */
+.timetable-grid {
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+}
+
+.timetable-grid table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.timetable-header {
+    background-color: #f8fafc;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.timetable-time {
+    background-color: #f1f5f9;
+    font-weight: 500;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    width: 120px;
+}
+
+.timetable-cell {
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    vertical-align: top;
+    min-width: 150px;
+    height: 80px;
+}
+
+.timetable-cell.empty {
+    background-color: #f8fafc;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.timetable-cell.break-cell {
+    background-color: #fff7ed;
+    border: 1px solid #fed7aa;
+}
+
+.faculty-highlight {
+    background-color: #dbeafe;
+    border-color: #3b82f6;
+}
+
+/* ... existing CSS ... */

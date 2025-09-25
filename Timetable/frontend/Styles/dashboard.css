@@ -1,0 +1,489 @@
+/* Dashboard Specific Styles */
+
+/* Dashboard Layout */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+.dashboard-main {
+    flex: 1;
+    overflow: auto;
+    padding: 1.5rem 2rem;
+    background-color: var(--background);
+    margin-left: 16rem; /* Account for sidebar width */
+}
+
+.dashboard-content {
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+/* Section Navigation */
+.section-nav {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.section-tab {
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s ease-in-out;
+}
+
+.section-tab:hover {
+    color: var(--text-primary);
+}
+
+.section-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+/* Welcome Card */
+.welcome-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+    color: var(--text-inverse);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.welcome-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.welcome-title {
+    color: var(--text-inverse);
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.welcome-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.5rem;
+}
+
+.welcome-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-draft {
+    background-color: var(--surface-secondary);
+    color: var(--text-primary);
+}
+
+.status-published {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
+
+/* Timetable Management */
+.timetable-controls {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.timetable-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Faculty List */
+.faculty-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.faculty-item {
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.faculty-item:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--border-strong);
+}
+
+.faculty-info h4 {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.faculty-details {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Room List */
+.room-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.room-item {
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.room-item:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--border-strong);
+}
+
+.room-info h4 {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.room-details {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.room-type {
+    background-color: var(--surface-secondary);
+    color: var(--text-primary);
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Subject List */
+.subject-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.subject-item {
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.subject-item:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--border-strong);
+}
+
+.subject-info h4 {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.subject-details {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.subject-code {
+    background-color: var(--surface-secondary);
+    color: var(--text-primary);
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Form Layouts */
+.form-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.form-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+    .form-grid-2,
+    .form-grid-3,
+    .form-grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-main {
+        margin-left: 0; /* Remove sidebar margin on mobile */
+    }
+}
+
+/* Action Buttons */
+.btn-delete {
+    background-color: transparent;
+    color: var(--danger);
+    border: 1px solid var(--border);
+}
+
+.btn-delete:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: var(--danger);
+}
+
+.btn-approve {
+    background-color: var(--success);
+    color: var(--text-inverse);
+}
+
+.btn-approve:hover {
+    background-color: var(--success-hover);
+}
+
+.btn-reject {
+    background-color: var(--danger);
+    color: var(--text-inverse);
+}
+
+.btn-reject:hover {
+    background-color: var(--danger-hover);
+}
+
+/* Leave Management */
+.leave-requests-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.leave-request-item {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    transition: all 0.15s ease-in-out;
+    box-shadow: var(--shadow-sm);
+}
+
+.leave-request-item:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--border-strong);
+}
+
+.leave-request-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.leave-request-info {
+    flex: 1;
+}
+
+.leave-faculty-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.leave-request-details {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.leave-reason {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    background-color: var(--surface-secondary);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.leave-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+/* Faculty Dashboard */
+.faculty-schedule-highlight {
+    background-color: rgba(99, 102, 241, 0.1) !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+}
+
+/* Student Dashboard */
+.student-header {
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+}
+
+.student-header-content {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.student-main {
+    padding: 1.5rem 2rem;
+}
+
+.student-content {
+    max-width: 72rem;
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-main {
+        padding: 1rem;
+        margin-left: 0;
+    }
+    
+    .welcome-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .welcome-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .timetable-controls {
+        flex-direction: column;
+    }
+    
+    .leave-request-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .leave-actions {
+        width: 100%;
+    }
+    
+    .student-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+/* Loading States */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.loading-spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--border);
+    border-top: 2px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .welcome-actions,
+    .action-buttons,
+    .btn {
+        display: none !important;
+    }
+    
+    .dashboard-main {
+        padding: 0;
+        margin-left: 0;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0f172a;
+        --foreground: #f8fafc;
+        --surface: #1e293b;
+        --surface-secondary: #334155;
+        --border: #475569;
+        --border-strong: #64748b;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-tertiary: #94a3b8;
+        --text-inverse: #0f172a;
+    }
+}

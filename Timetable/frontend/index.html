@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Classroom Timetable Scheduler</title>
+    <link rel="stylesheet" href="Styles/main.css">
+    <link rel="stylesheet" href="Styles/components.css">
+    <link rel="stylesheet" href="Styles/dashboard.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <div id="app" class="min-h-screen bg-background">
+        <!-- Login Page -->
+        <div id="loginPage" class="min-h-screen flex items-center justify-center px-4">
+            <div class="w-full max-w-md">
+                <div class="card p-8">
+                    <div class="text-center mb-8">
+                        <h1 class="text-primary text-2xl font-bold mb-2">Smart Classroom Timetable</h1>
+                        <p class="text-secondary">Sign in to access your dashboard</p>
+                    </div>
+                    
+                    <form id="loginForm" class="space-y-6">
+                        <div>
+                            <label for="username" class="label">Username</label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                class="input" 
+                                placeholder="Enter your username"
+                                required
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="password" class="label">Password</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="input" 
+                                placeholder="Enter your password"
+                                required
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="role" class="label">Role</label>
+                            <select id="role" class="select" required>
+                                <option value="">Select your role</option>
+                                <option value="admin">Admin</option>
+                                <option value="faculty">Faculty</option>
+                                <option value="student">Student</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" id="loginBtn" class="btn btn-primary w-full">
+                            <span id="loginBtnText">Sign In</span>
+                            <span id="loginLoader" class="loader hidden"></span>
+                        </button>
+                    </form>
+                    
+                    <div class="mt-6 p-4 bg-primary/10 rounded-lg border border-primary/20">
+                        <h4 class="text-primary font-medium mb-2">Demo Credentials:</h4>
+                        <div class="text-sm text-secondary space-y-1">
+                            <div><strong>Admin:</strong> admin / admin123</div>
+                            <div><strong>Faculty:</strong> faculty1 / faculty123</div>
+                            <div><strong>Student:</strong> student1 / student123</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="adminDashboard" class="hidden">
+            <div class="flex h-screen">
+                <!-- Sidebar -->
+                <div id="adminSidebar" class="sidebar">
+                    <div class="p-6">
+                        <h2 class="text-primary font-bold text-lg">Admin Panel</h2>
+                    </div>
+                    <nav class="px-3">
+                        <a href="#" class="sidebar-link active" data-section="faculty">
+                            <i data-lucide="users"></i>
+                            <span>Faculty</span>
+                        </a>
+                        <a href="#" class="sidebar-link" data-section="rooms">
+                            <i data-lucide="building"></i>
+                            <span>Rooms</span>
+                        </a>
+                        <a href="#" class="sidebar-link" data-section="subjects">
+                            <i data-lucide="book"></i>
+                            <span>Subjects</span>
+                        </a>
+                        <a href="#" class="sidebar-link" data-section="practicals">
+                            <i data-lucide="beaker"></i>
+                            <span>Practicals</span>
+                        </a>
+                        <a href="#" class="sidebar-link" data-section="breaks">
+                            <i data-lucide="timer"></i>
+                            <span>Breaks</span>
+                        </a>
+                        <a href="#" class="sidebar-link" data-section="timetable">
+                            <i data-lucide="calendar"></i>
+                            <span>Timetable</span>
+                        </a>
+                        <a href="#" class="sidebar-link" data-section="leave">
+                            <i data-lucide="calendar-x"></i>
+                            <span>Leave Management</span>
+                        </a>
+                    </nav>
+                    <div class="mt-auto p-4">
+                        <button id="adminLogout" class="btn btn-outline w-full text-danger border-danger hover:bg-danger/10">
+                            <i data-lucide="log-out" class="w-4 h-4 mr-2"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <main class="flex-1 overflow-auto p-6 lg:p-8 bg-background">
+                    <div class="max-w-6xl mx-auto">
+                        <!-- Faculty Section -->
+                        <div id="facultySection" class="dashboard-section">
+                            <div class="space-y-6">
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Add New Faculty</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div>
+                                            <label for="facultyName" class="label">Name</label>
+                                            <input type="text" id="facultyName" class="input" placeholder="Enter faculty name">
+                                        </div>
+                                        <div>
+                                            <label for="facultySubject" class="label">Subject</label>
+                                            <input type="text" id="facultySubject" class="input" placeholder="Enter subject">
+                                        </div>
+                                        <div>
+                                            <label for="facultyEmail" class="label">Email</label>
+                                            <input type="email" id="facultyEmail" class="input" placeholder="Enter email">
+                                        </div>
+                                    </div>
+                                    <button id="addFacultyBtn" class="btn btn-primary mt-4">
+                                        <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                                        Add Faculty
+                                    </button>
+                                </div>
+                                
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Faculty List</h3>
+                                    <div id="facultyList" class="space-y-3">
+                                        <!-- Faculty items will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rooms Section -->
+                        <div id="roomsSection" class="dashboard-section hidden">
+                            <div class="space-y-6">
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Add New Room</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div>
+                                            <label for="roomName" class="label">Room Name</label>
+                                            <input type="text" id="roomName" class="input" placeholder="Enter room name">
+                                        </div>
+                                        <div>
+                                            <label for="roomCapacity" class="label">Capacity</label>
+                                            <input type="number" id="roomCapacity" class="input" placeholder="Enter capacity">
+                                        </div>
+                                        <div>
+                                            <label for="roomType" class="label">Type</label>
+                                            <select id="roomType" class="select">
+                                                <option value="">Select type</option>
+                                                <option value="Classroom">Classroom</option>
+                                                <option value="Laboratory">Laboratory</option>
+                                                <option value="Auditorium">Auditorium</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button id="addRoomBtn" class="btn btn-primary mt-4">
+                                        <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                                        Add Room
+                                    </button>
+                                </div>
+                                
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Room List</h3>
+                                    <div id="roomList" class="space-y-3">
+                                        <!-- Room items will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Subjects Section -->
+                        <div id="subjectsSection" class="dashboard-section hidden">
+                            <div class="space-y-6">
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Add New Subject</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div>
+                                            <label for="subjectName" class="label">Subject Name</label>
+                                            <input type="text" id="subjectName" class="input" placeholder="Enter subject name">
+                                        </div>
+                                        <div>
+                                            <label for="subjectCode" class="label">Subject Code</label>
+                                            <input type="text" id="subjectCode" class="input" placeholder="Enter subject code">
+                                        </div>
+                                        <div>
+                                            <label for="subjectCredits" class="label">Credits</label>
+                                            <input type="number" id="subjectCredits" class="input" placeholder="Enter credits">
+                                        </div>
+                                    </div>
+                                    <button id="addSubjectBtn" class="btn btn-primary mt-4">
+                                        <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                                        Add Subject
+                                    </button>
+                                </div>
+                                
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Subject List</h3>
+                                    <div id="subjectList" class="space-y-3">
+                                        <!-- Subject items will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Practicals Section -->
+                        <div id="practicalsSection" class="dashboard-section hidden">
+                            <div class="space-y-6">
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Add New Practical Session</h3>
+                                    <p class="text-secondary mb-6">Configure practical sessions with custom durations for laboratory work and hands-on learning.</p>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                                        <div>
+                                            <label for="practicalSubject" class="label">Subject</label>
+                                            <select id="practicalSubject" class="select">
+                                                <option value="">Select subject</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="practicalFaculty" class="label">Faculty</label>
+                                            <select id="practicalFaculty" class="select">
+                                                <option value="">Select faculty</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="practicalRoom" class="label">Room</label>
+                                            <select id="practicalRoom" class="select">
+                                                <option value="">Select room</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label for="practicalDuration" class="label">Duration (minutes)</label>
+                                            <input type="number" id="practicalDuration" class="input" placeholder="e.g., 120 for 2 hours" min="30" max="240">
+                                        </div>
+                                        <div>
+                                            <label for="practicalDescription" class="label">Description</label>
+                                            <input type="text" id="practicalDescription" class="input" placeholder="Brief description of practical work">
+                                        </div>
+                                    </div>
+                                    <button id="addPracticalBtn" class="btn btn-practical">
+                                        <i data-lucide="beaker" class="w-4 h-4 mr-2"></i>
+                                        Add Practical Session
+                                    </button>
+                                </div>
+                                
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Practical Sessions List</h3>
+                                    <div id="practicalsList" class="space-y-3">
+                                        <!-- Practical items will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Breaks Section -->
+                        <div id="breaksSection" class="dashboard-section hidden">
+                            <div class="space-y-6">
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Add New Break</h3>
+                                    <p class="text-secondary mb-6">Configure break periods including lunch breaks, tea breaks, and other scheduled intervals.</p>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div>
+                                            <label for="breakName" class="label">Break Name</label>
+                                            <input type="text" id="breakName" class="input" placeholder="e.g., Lunch Break">
+                                        </div>
+                                        <div>
+                                            <label for="breakStartTime" class="label">Start Time</label>
+                                            <input type="time" id="breakStartTime" class="input">
+                                        </div>
+                                        <div>
+                                            <label for="breakDuration" class="label">Duration (minutes)</label>
+                                            <input type="number" id="breakDuration" class="input" placeholder="e.g., 60" min="5" max="180">
+                                        </div>
+                                        <div>
+                                            <label for="breakType" class="label">Type</label>
+                                            <select id="breakType" class="select">
+                                                <option value="">Select type</option>
+                                                <option value="meal">Meal Break</option>
+                                                <option value="short">Short Break</option>
+                                                <option value="assembly">Assembly</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button id="addBreakBtn" class="btn btn-break mt-4">
+                                        <i data-lucide="timer" class="w-4 h-4 mr-2"></i>
+                                        Add Break
+                                    </button>
+                                </div>
+                                
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Breaks List</h3>
+                                    <div id="breaksList" class="space-y-3">
+                                        <!-- Break items will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timetable Section -->
+                        <div id="timetableSection" class="dashboard-section hidden">
+                            <div class="space-y-6">
+                                <div class="card p-6 bg-primary/5 border border-primary/20">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h3 class="text-primary font-semibold mb-2">Timetable Management</h3>
+                                            <p class="text-secondary">Generate and publish weekly timetables for all classes</p>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span id="timetableStatus" class="badge bg-surface-secondary text-primary">Draft</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex gap-3">
+                                        <button id="generateTimetableBtn" class="btn btn-primary">
+                                            <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                                            <span id="generateText">Generate Timetable</span>
+                                            <!-- <span id="generateLoader" class="loader hidden ml-2"></span> -->
+                                        </button>
+                                        <button id="publishTimetableBtn" class="btn bg-success hover:bg-success-hover text-white" disabled>
+                                            <i data-lucide="send" class="w-4 h-4 mr-2"></i>
+                                            <span id="publishText">Publish Timetable</span>
+                                            <span id="publishLoader" class="loader hidden ml-2"></span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div id="timetableInfo" class="text-sm text-tertiary mt-4">
+                                        <!-- Timetable info will be populated here -->
+                                    </div>
+                                </div>
+                                
+                                <div id="timetableGrid" class="card p-6">
+                                    <!-- Timetable grid will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Leave Management Section -->
+                        <div id="leaveSection" class="dashboard-section hidden">
+                            <div class="space-y-6">
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Leave Requests Management</h3>
+                                    <div id="leaveRequestsList" class="space-y-3">
+                                        <!-- Leave requests will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Faculty Dashboard -->
+        <div id="facultyDashboard" class="hidden">
+            <div class="flex h-screen">
+                <!-- Sidebar -->
+                <div id="facultySidebar" class="sidebar">
+                    <div class="p-6">
+                        <h2 class="text-primary font-bold text-lg">Faculty Panel</h2>
+                    </div>
+                    <nav class="px-3">
+                        <a href="#" class="sidebar-link active" data-section="timetable">
+                            <i data-lucide="calendar"></i>
+                            <span>My Timetable</span>
+                        </a>
+                        <a href="#" class="sidebar-link" data-section="leave">
+                            <i data-lucide="calendar-x"></i>
+                            <span>Leave Requests</span>
+                        </a>
+                    </nav>
+                    <div class="mt-auto p-4">
+                        <button id="facultyLogout" class="btn btn-outline w-full text-danger border-danger hover:bg-danger/10">
+                            <i data-lucide="log-out" class="w-4 h-4 mr-2"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <main class="flex-1 overflow-auto p-6 lg:p-8 bg-background">
+                    <div class="max-w-6xl mx-auto">
+                        <!-- Faculty Timetable Section -->
+                        <div id="facultyTimetableSection" class="dashboard-section">
+                            <div class="space-y-6">
+                                <div class="card p-6 bg-primary/5 border border-primary/20">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h3 id="facultyWelcome" class="text-primary font-semibold mb-2">Welcome, Faculty</h3>
+                                            <p class="text-secondary">
+                                                <span id="facultySubjectInfo">Subject: Not Assigned</span> | Below is your weekly teaching schedule. Your assigned classes are highlighted in blue.
+                                            </p>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span id="facultyTimetableStatus" class="badge bg-surface-secondary text-primary">Draft</span>
+                                            <button id="facultyDashboardLogout" class="btn btn-outline text-danger border-danger hover:bg-danger/10">
+                                                <i data-lucide="log-out" class="w-4 h-4 mr-1"></i>
+                                                Logout
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="facultyTimetableInfo" class="text-sm text-tertiary mt-2">
+                                        <!-- Timetable info will be populated here -->
+                                    </div>
+                                </div>
+                                <div id="facultyTimetableGrid" class="card p-6">
+                                    <!-- Faculty timetable grid will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Faculty Leave Section -->
+                        <div id="facultyLeaveSection" class="dashboard-section hidden">
+                            <div class="space-y-6">
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">Apply for Leave</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label for="leaveDate" class="label">Date</label>
+                                            <input type="date" id="leaveDate" class="input">
+                                        </div>
+                                        <div>
+                                            <label for="leavePeriod" class="label">Period</label>
+                                            <select id="leavePeriod" class="select">
+                                                <option value="">Select period</option>
+                                                <option value="9:00-10:00">9:00-10:00</option>
+                                                <option value="10:00-11:00">10:00-11:00</option>
+                                                <option value="11:00-12:00">11:00-12:00</option>
+                                                <option value="12:00-1:00">12:00-1:00</option>
+                                                <option value="2:00-3:00">2:00-3:00</option>
+                                                <option value="3:00-4:00">3:00-4:00</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="leaveReason" class="label">Reason</label>
+                                        <textarea id="leaveReason" class="textarea" placeholder="Enter reason for leave request" rows="3"></textarea>
+                                    </div>
+                                    <button id="submitLeaveBtn" class="btn btn-primary">
+                                        Submit Leave Request
+                                    </button>
+                                </div>
+
+                                <div class="card p-6">
+                                    <h3 class="text-primary font-semibold mb-4">My Leave Request History</h3>
+                                    <div id="facultyLeaveHistory" class="space-y-3">
+                                        <!-- Faculty leave history will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Student Dashboard -->
+        <div id="studentDashboard" class="hidden">
+            <div class="min-h-screen bg-background">
+                <div class="bg-surface border-b border-border p-4">
+                    <div class="max-w-7xl mx-auto flex items-center justify-between">
+                        <h1 class="text-primary font-bold">Student Dashboard</h1>
+                        <button id="studentLogout" class="btn btn-outline text-danger border-danger hover:bg-danger/10">
+                            <i data-lucide="log-out" class="w-4 h-4 mr-1"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-6 lg:p-8">
+                    <div class="max-w-6xl mx-auto space-y-6">
+                        <div class="card p-6 bg-primary/5 border border-primary/20">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 id="studentWelcome" class="text-primary font-semibold mb-2">Welcome, Student</h3>
+                                    <p class="text-secondary">
+                                        <span id="studentClassInfo">Class: Not Assigned</span> | Here's your weekly class schedule.
+                                    </p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span id="studentTimetableStatus" class="badge bg-surface-secondary text-primary">Draft</span>
+                                </div>
+                            </div>
+                            <div id="studentTimetableInfo" class="text-sm text-tertiary mt-2">
+                                <!-- Timetable info will be populated here -->
+                            </div>
+                        </div>
+                        <div id="studentTimetableGrid" class="card p-6">
+                            <!-- Student timetable grid will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <!-- Core utilities first -->
+<script src="Script/utils.js"></script>
+
+<!-- API and Storage layer -->
+<script src="Script/apiClient.js"></script>
+<script src="Script/storage.js"></script>
+
+<!-- Managers (but don't auto-initialize) -->
+<script src="Script/faculty.js"></script>
+<script src="Script/rooms.js"></script>
+<script src="Script/subjects.js"></script>
+<script src="Script/practicals.js"></script>
+<script src="Script/breaks.js"></script>
+<script src="Script/leave.js"></script>
+<script src="Script/timetable.js"></script>
+<script src="Script/admin.js"></script>
+<script src="Script/facultyDashboard.js"></script>
+<script src="Script/student.js"></script>
+<script src="Script/auth.js"></script>
+
+<!-- Main app controller (initializes everything) -->
+<script src="Script/app.js"></script>
+
+
+</body>
+</html>

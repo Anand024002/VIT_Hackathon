@@ -1,0 +1,143 @@
+/* Global Styles and CSS Variables */
+
+:root {
+  /* Modern Color Palette */
+  --primary: #6366f1; /* Indigo */
+  --primary-hover: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #8b5cf6; /* Violet */
+  --secondary-hover: #7c3aed;
+  --accent: #0ea5e9; /* Sky Blue */
+  --accent-hover: #0284c7;
+  --success: #10b981; /* Emerald */
+  --success-hover: #059669;
+  --warning: #f59e0b; /* Amber */
+  --warning-hover: #d97706;
+  --danger: #ef4444; /* Red */
+  --danger-hover: #dc2626;
+  
+  /* Neutrals */
+  --background: #f9fafb;
+  --surface: #ffffff;
+  --surface-secondary: #f3f4f6;
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --text-inverse: #ffffff;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  
+  /* Other Variables */
+  --radius: 0.5rem;
+  --radius-full: 9999px;
+  --transition: all 0.2s ease-in-out;
+  --font-size: 16px;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #818cf8;
+    --primary-hover: #6366f1;
+    --secondary: #a78bfa;
+    --secondary-hover: #8b5cf6;
+    --accent: #38bdf8;
+    --accent-hover: #0ea5e9;
+    --success: #34d399;
+    --success-hover: #10b981;
+    --warning: #fbbf24;
+    --warning-hover: #f59e0b;
+    --danger: #f87171;
+    --danger-hover: #ef4444;
+    
+    --background: #0f172a;
+    --surface: #1e293b;
+    --surface-secondary: #334155;
+    --border: #475569;
+    --border-strong: #64748b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #94a3b8;
+    --text-inverse: #0f172a;
+  }
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--background);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+h1 { font-size: 2.25rem; } /* 36px */
+h2 { font-size: 1.875rem; } /* 30px */
+h3 { font-size: 1.5rem; } /* 24px */
+h4 { font-size: 1.25rem; } /* 20px */
+h5 { font-size: 1.125rem; } /* 18px */
+h6 { font-size: 1rem; } /* 16px */
+
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Focus Styles */
+:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* Selection Styles */
+::selection {
+  background-color: var(--primary);
+  color: var(--text-inverse);
+}
